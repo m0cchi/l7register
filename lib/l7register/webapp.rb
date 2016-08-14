@@ -18,9 +18,9 @@ class WebApp < Sinatra::Base
   get '/:domain' do
     begin
       data = @@store[params['domain']]
-      data.to_json.dump
+      data.to_json.to_s
     rescue
-      {ok: false}.to_json.dump
+      {ok: false}.to_json.to_s
     end
   end
 
@@ -29,7 +29,7 @@ class WebApp < Sinatra::Base
       data = @@store[params['domain']]
       data[params['param'].to_sym]
     rescue
-      {ok: false}.to_json.dump
+      {ok: false}.to_json.to_s
     end
   end
 
@@ -41,9 +41,9 @@ class WebApp < Sinatra::Base
       map[:ssl] = !(map[:ssl_cert].nil?)
       map[:backend] = params['backend']
       @@store[params['domain']] = map
-      map.to_json.dump
+      map.to_json.to_s
     rescue
-      {ok: false}.to_json.dump      
+      {ok: false}.to_json.to_s
     end
   end
 
