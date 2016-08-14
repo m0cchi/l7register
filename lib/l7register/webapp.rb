@@ -53,10 +53,6 @@ class WebApp < Sinatra::Base
       end
     end
 
-    def write(path)
-      
-    end
-
     def finally
       File.open(@@store_path, 'w') do |e|
         YAML.dump(@@store, e)
