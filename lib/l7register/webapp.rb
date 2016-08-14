@@ -25,7 +25,12 @@ class WebApp < Sinatra::Base
   end
 
   get '/:domain/:param' do
-    params['domain'] + params['param']
+    begin
+      data = @@store[params['domain']]
+      data[params['param'].to_sym].to_json.dump
+    rescue
+      {ok: false}.to_json.dump
+    end
   end
 
   post '/:domain' do
